@@ -1,0 +1,19 @@
+package com.employeeManagement.service.validation.Implementations;
+
+
+
+import com.employeeManagement.service.validation.Age;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+public class AgeValidator implements ConstraintValidator<Age, Age>{
+
+	@Override
+	public boolean isValid(Age value, ConstraintValidatorContext context) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+}

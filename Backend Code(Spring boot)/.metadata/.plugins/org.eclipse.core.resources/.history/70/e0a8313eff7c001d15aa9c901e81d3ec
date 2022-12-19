@@ -1,0 +1,5 @@
+package com.employeeManagement.service.validation;
+
+public interface BirthDate {
+
+}

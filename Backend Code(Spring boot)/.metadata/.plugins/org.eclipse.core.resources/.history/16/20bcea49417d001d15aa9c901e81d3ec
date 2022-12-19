@@ -1,0 +1,7 @@
+package com.employeeManagement.service.exceptions;
+
+public class MethodArgumentTypeMismatchException extends RuntimeException{
+	
+	
+
+}

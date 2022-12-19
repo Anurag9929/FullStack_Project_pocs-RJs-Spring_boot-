@@ -1,0 +1,5 @@
+package com.employeeManagement.service.exceptions;
+
+public class CannotCreateTransactionException {
+
+}

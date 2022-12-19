@@ -1,0 +1,110 @@
+package com.spring.employee.trial.config;
+
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.AbstractSecurityBuilder;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.config.annotation.web.configurers.PasswordManagementConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.spring.employee.trial.security.Custom_User_Detail_Service;
+import com.spring.employee.trial.security.JwtAuthenticationEntryPoint;
+import com.spring.employee.trial.security.JwtAuthenticationFilter;
+
+@Configuration
+@EnableWebSecurity
+public class Config {
+	
+
+
+
+
+
+
+
+	//Method 5:Closing here->
+		
+		//jwt configuration method1 opening here:
+		
+		@Autowired
+		private Custom_User_Detail_Service custom_User_Detail_Service;
+		
+		@Autowired
+		private JwtAuthenticationEntryPoint authenticationEntryPoint;
+		
+		@Autowired
+		private JwtAuthenticationFilter authenticationFilter;
+		
+		
+		
+	    @Bean
+	    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	        return authenticationConfiguration.getAuthenticationManager();
+	    }
+		
+
+		@Bean
+		public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	         http
+	         .csrf().disable()
+			.authorizeHttpRequests()
+			.requestMatchers("/api/v1/auth/login").permitAll()
+			.anyRequest()
+			.authenticated()
+			.and()
+			.exceptionHandling().authenticationEntryPoint(this.authenticationEntryPoint)
+			.and()
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+			
+	         http
+			.addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+			return http.build();
+
+		}
+		
+//		@Bean
+//		public void configure(AuthenticationManagerBuilder auth)throws Exception{
+//			auth.userDetailsService(this.custom_User_Detail_Service).passwordEncoder(passwordEncoder());
+//		}
+		
+		@Bean
+		public PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
+		
+
+//	    @Bean  not working
+//	    public AuthenticationManager authenticationManagerBean() throws Exception {
+//	        return super.authenticationManagerBean();
+//	    }
+		
+
+//	    @Bean
+//	    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//	        return authenticationConfiguration.getAuthenticationManager();
+//	    }
+//		
+		
+		
+		//jwt configuration method1 closing here:
+
+	
+
+
+}

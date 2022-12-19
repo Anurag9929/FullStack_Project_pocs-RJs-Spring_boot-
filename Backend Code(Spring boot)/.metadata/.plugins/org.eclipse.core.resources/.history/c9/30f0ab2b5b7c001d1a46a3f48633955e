@@ -1,0 +1,13 @@
+package com.employeeManagement.service;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class EmployeeManagementSystemBackendServiceProjectApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EmployeeManagementSystemBackendServiceProjectApplication.class, args);
+	}
+
+}

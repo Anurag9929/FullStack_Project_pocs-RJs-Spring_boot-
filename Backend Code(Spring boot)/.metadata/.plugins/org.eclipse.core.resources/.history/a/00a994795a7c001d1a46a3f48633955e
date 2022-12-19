@@ -1,0 +1,285 @@
+//package com.spring.employee.trial.config;
+//
+//import org.springframework.security.authentication.AuthenticationManager;
+//import org.springframework.security.config.Customizer;
+//import org.springframework.security.config.annotation.AbstractSecurityBuilder;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.*;
+//import org.springframework.security.config.annotation.web.configurers.PasswordManagementConfigurer;
+//import org.springframework.security.config.http.SessionCreationPolicy;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.*;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+//import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+//import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+//
+//import com.spring.employee.trial.security.Custom_User_Detail_Service;
+//import com.spring.employee.trial.security.JwtAuthenticationEntryPoint;
+//import com.spring.employee.trial.security.JwtAuthenticationFilter;
+//
+//@Configuration
+//@EnableWebSecurity
+//
+//public class SecurityConfig {
+//	// Method 1:Opening here:->
+//	// tHis is a basic authentication way1 :-> working
+////	@Bean
+////	public WebSecurityCustomizer webSecurityCustomizer() {
+////		return (web) -> web.ignoring()
+////				// Spring Security should completely ignore URLs starting with /resources/
+////				.requestMatchers("/resources/**");
+////	}
+////
+////	@SuppressWarnings("deprecation")
+////	@Bean
+////	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+////		http.csrf().disable();
+////		http.authorizeRequests().requestMatchers("//api/employee/personaltab/**").permitAll()
+////				.and().authorizeRequests().requestMatchers("//api/employee/personaltab/**")
+////				.hasRole("ADMIN").anyRequest().authenticated().and().httpBasic();
+////		return http.build();
+////	}
+////	
+////	@SuppressWarnings("deprecation")
+////	@Bean
+////	public UserDetailsService userDetailsService() {
+////		UserDetails user = User.withDefaultPasswordEncoder().username("user").password("password").roles("USER")
+////				.build();
+////		UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("password")
+////				.roles("ADMIN", "USER").build();
+////		return new InMemoryUserDetailsManager(user, admin);
+////	}
+//
+//	// tHis is a basic authentication way1 :-> working
+//
+//	// Method 1:Closing here:->
+//
+////	@Bean
+////	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+////
+////	
+////
+////		http.
+////		csrf().
+////		disable()
+////		.authorizeHttpRequests()
+////		.anyRequest().
+////		authenticated().
+////		and().
+////		httpBasic();
+////		return http.build();
+////	}
+//
+//	// Step3: Will do JWT authentication
+//
+//	// Method 3:Opening here->
+////	 @Bean
+////	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+////	        http.csrf().disable().authorizeHttpRequests().anyRequest().authenticated().and().httpBasic();
+////	          
+////	        return http.build();
+////	    }
+//
+//	// Method 3:Closing here->
+//
+//	// Method 4:Opening here->
+//
+////	 @Autowired
+////	 private Custom_User_Detail_Service custom_user_detail_service;
+////	
+////	 @Bean
+////	    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception 
+////	 {
+////	        AuthenticationManagerBuilder authenticationManagerBuilder = 
+////	            http.getSharedObject(AuthenticationManagerBuilder.class);
+////	        authenticationManagerBuilder.authenticationProvider();
+////	        return authenticationManagerBuilder.build();
+//////		 http.userDetailsService(this.custom_user_detail_service).passwordManagement((Customizer<PasswordManagementConfigurer<HttpSecurity>>) passwordEncoder());
+////
+//	// return null;
+//
+////    }
+//
+////	@Bean
+////	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+////	
+////
+////		http
+////		.csrf()
+////		.disable()
+////		.authorizeHttpRequests()
+////		.anyRequest()
+////		.authenticated()
+////		.and()
+////		.httpBasic();
+////		return http.build();
+////	}
+////	@Bean
+////	public PasswordEncoder passwordEncoder() {
+////		return BCryptPasswordEncoder(();
+////	}
+////	@Bean
+////	public PasswordEncoder passwordEncoder1() {
+////		return passwordEncoder1();
+////	}
+////	
+////	@Bean
+////	public void filterChain(Authet) throws Exception {
+////	
+////
+////		http.
+////		csrf().
+////		disable()
+////		.authorizeHttpRequests()
+////		.anyRequest().
+////		authenticated().
+////		and().
+////		httpBasic();
+////		return http.build();
+////	}
+//
+////Method 4:Closing here->
+//
+////Method 5:Opening here->
+//
+////	@Autowired
+////	private UserDetailsService userDetailsService;
+////
+////	private static PasswordEncoder passwordEncoder() {
+////		return new BCryptPasswordEncoder();
+////	}
+////
+////	@Bean
+////	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+////		http
+////		.csrf().disable()
+////		.authorizeRequests()
+////		.requestMatchers("/register/**")
+////		.permitAll()
+////		.requestMatchers("/index")
+////				.permitAll()
+////				.requestMatchers("/users")
+////				.hasRole("ADMIN")
+////				.and()
+////				.formLogin(form -> form
+////						.loginPage("/login")
+////						.loginProcessingUrl("/login")
+////						.defaultSuccessUrl("/users")
+////						.permitAll())
+////				.logout(logout -> logout
+////						.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
+////		
+////		http
+////		.csrf()
+////		.disable()
+////		.authorizeHttpRequests()
+////		.anyRequest()
+////		.authenticated()
+////		.and()
+////		.httpBasic();
+////		return http.build();
+////
+////
+////	}
+//////@Autowired	
+////	@Bean
+////public void SecurityConfig(AuthenticationManagerBuilder builder) throws Exception {
+////	builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//	
+////}
+//
+////	@Bean
+////	public WebSecurityCustomizer webSecurityCustomizer() {
+////		return null;
+////	}
+//
+////Method 5:Closing here->
+//	
+//	//jwt configuration method1 opening here:
+//	
+//	@Autowired
+//	private Custom_User_Detail_Service custom_User_Detail_Service;
+//	
+//	@Autowired
+//	private JwtAuthenticationEntryPoint authenticationEntryPoint;
+//	
+//	@Autowired
+//	private JwtAuthenticationFilter authenticationFilter;
+//	  // which i followed but getting error
+////	@Bean
+////	public void filterChain(HttpSecurity http) throws Exception {
+////
+////	
+////
+////		http.
+////		csrf().
+////		disable()
+////		.authorizeHttpRequests()
+////		.requestMatchers("/api/v1/auth/login").permitAll()
+////		.anyRequest().
+////		authenticated().
+////		and()
+////		.exceptionHandling().authenticationEntryPoint(this.authenticationEntryPoint)
+////		.and()
+////		.sessionManagement()
+////		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+////		http.addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+////
+////	}
+//	// mycode 
+//	@Bean
+//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//         http
+//         .csrf()
+//         .disable()
+//		.authorizeHttpRequests()
+//		.requestMatchers("/api/v1/auth/login").permitAll()
+//		.anyRequest()
+//		.authenticated()
+//		.and()
+//		.exceptionHandling().authenticationEntryPoint(this.authenticationEntryPoint)
+//		.and()
+//		.sessionManagement()
+//		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		
+//         http
+//		.addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+//		return http.build();
+//
+//	}
+//	
+////	@Bean
+////	public void configure(AuthenticationManagerBuilder auth)throws Exception{
+////		auth.userDetailsService(this.custom_User_Detail_Service).passwordEncoder(passwordEncoder());
+////	}
+//	
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
+//	
+//
+////    @Bean  not working
+////    public AuthenticationManager authenticationManagerBean() throws Exception {
+////        return super.authenticationManagerBean();
+////    }
+//	
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
+//    }
+//	
+//	
+//	
+//	//jwt configuration method1 closing here:
+//
+//}

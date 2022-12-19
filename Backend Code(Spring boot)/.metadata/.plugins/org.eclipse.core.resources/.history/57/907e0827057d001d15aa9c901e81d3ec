@@ -1,0 +1,39 @@
+package com.employeeManagement.service.validation.Implementations;
+
+
+
+import java.util.Calendar;
+import java.util.Date;
+
+import com.employeeManagement.service.validation.Age;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
+public class AgeValidator implements ConstraintValidator<Age, Integer>{
+
+	@Override
+	public boolean isValid(Integer value, ConstraintValidatorContext context) {
+		
+//		return false;
+		 return value > 0 && value < 100;
+	}
+
+//	@Override
+//	public boolean isValid(Age value, ConstraintValidatorContext context) {
+//	
+//		return false;
+//	}
+	
+//	 @Override
+//	  public boolean isValid(final Age valueToValidate, final ConstraintValidatorContext context) {
+//	    Calendar dateInCalendar = Calendar.getInstance();
+////	    dateInCalendar.set(valueToValidate);
+//
+//	    return Calendar.getInstance().get(Calendar.YEAR) - dateInCalendar.get(Calendar.YEAR) >= 18;
+//	  }
+	
+	
+
+	
+}
